@@ -1,0 +1,1362 @@
+/* ============================================================
+   EarnPlus — application styles (Bootstrap 5 sits underneath)
+   All motion here is transform/opacity only (60fps friendly).
+   ============================================================ */
+
+:root {
+    --ep-gold: #f5b301;
+    --ep-gold-deep: #d99a00;
+    --ep-ink: #101828;
+    --ep-muted: #667085;
+    --ep-bg: #f8fafc;
+    --ep-card: #ffffff;
+    --ep-accent: #0ea5e9;
+}
+
+/* ---------- Base ---------- */
+body {
+    background: var(--ep-bg);
+    color: var(--ep-ink);
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.ep-hero {
+    background: radial-gradient(1200px 500px at 50% -10%, #0ea5e91a, transparent),
+        linear-gradient(180deg, #0b1220 0%, #111c33 100%);
+    color: #fff;
+}
+
+/* ---------- Entrance states (JS animates to visible) ---------- */
+[data-animate] {
+    opacity: 0;
+}
+
+.no-js [data-animate],
+.no-anime [data-animate] {
+    opacity: 1;
+}
+
+/* ---------- Buttons: press feedback ---------- */
+.btn {
+    transition: transform 120ms ease-out, box-shadow 160ms ease-out, filter 160ms ease-out;
+    will-change: transform;
+}
+
+.btn-pressing {
+    transform: scale(0.96);
+}
+
+.btn-gold {
+    background: linear-gradient(180deg, var(--ep-gold), var(--ep-gold-deep));
+    border: none;
+    color: #3a2a00;
+    font-weight: 700;
+    box-shadow: 0 8px 24px -8px #f5b30199;
+}
+
+.btn-gold:hover {
+    color: #3a2a00;
+    filter: brightness(1.06);
+    box-shadow: 0 12px 28px -8px #f5b301aa;
+}
+
+/* ---------- Feature cards: hover lift (transform only) ---------- */
+.feature-card {
+    background: var(--ep-card);
+    border: 1px solid #eef2f6;
+    border-radius: 1.25rem;
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease-out;
+    will-change: transform;
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px -16px #10182826;
+}
+
+.feature-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: #f5b3011f;
+}
+
+/* ---------- Coin ---------- */
+.coin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #101828;
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 10px 30px -10px #00000088;
+}
+
+.coin-dot {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffe08a, var(--ep-gold) 60%, var(--ep-gold-deep));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #5b3d00;
+    font-size: 0.95rem;
+    font-weight: 800;
+    box-shadow: inset 0 -2px 4px #00000033;
+}
+
+.coin-count {
+    font-variant-numeric: tabular-nums;
+    min-width: 3ch;
+    display: inline-block;
+    text-align: right;
+}
+
+/* ---------- Skeleton loaders ---------- */
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background: #e9eef4;
+    border-radius: 0.6rem;
+    color: transparent !important;
+    pointer-events: none;
+    user-select: none;
+}
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, #ffffffb3, transparent);
+    animation: ep-shimmer 1.4s infinite;
+    will-change: transform;
+}
+
+.skeleton.skeleton-dark {
+    background: #ffffff1f;
+}
+
+.skeleton.skeleton-dark::after {
+    background: linear-gradient(90deg, transparent, #ffffff2e, transparent);
+}
+
+@keyframes ep-shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.skeleton-line {
+    height: 0.9rem;
+}
+
+.skeleton-pill {
+    height: 2.4rem;
+    border-radius: 999px;
+}
+
+/* ---------- Hero decorations ---------- */
+.hero-glow-coin {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffe08a, var(--ep-gold) 55%, var(--ep-gold-deep));
+    box-shadow: 0 0 0 18px #f5b30114, 0 0 80px #f5b30166, inset 0 -8px 18px #0000002e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #5b3d00;
+    will-change: transform;
+}
+
+.stat-chip {
+    background: #ffffff14;
+    border: 1px solid #ffffff22;
+    border-radius: 1rem;
+    backdrop-filter: blur(6px);
+}
+
+/* ---------- Footer ---------- */
+.ep-footer {
+    color: var(--ep-muted);
+    font-size: 0.9rem;
+}
+
+/* ---------- Auth pages ---------- */
+.auth-body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fff8e6 0%, #fdf3d8 40%, #f6e7bd 100%);
+}
+
+.auth-wrap {
+    max-width: 460px;
+    margin: 0 auto;
+    padding: 3rem 1rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.auth-card {
+    border: 0;
+    border-radius: 1.25rem;
+}
+
+.coin-dot-lg {
+    width: 2.4rem;
+    height: 2.4rem;
+    font-size: 1.3rem;
+}
+
+.verify-icon {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.otp-input {
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+    font-weight: 700;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .skeleton::after {
+        animation: none;
+    }
+
+    [data-animate] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    * {
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================================
+   Phase 3 — wallet, dashboard, spin wheel (transform/opacity only)
+   ============================================================ */
+
+.ls-wide { letter-spacing: 0.12em; }
+
+/* ---------- Promo banner ---------- */
+.ep-banner {
+    background: linear-gradient(120deg, #7c3aed 0%, #0ea5e9 100%);
+    box-shadow: 0 20px 40px -18px #7c3aed88;
+}
+.ep-banner-coin {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    margin-top: -2rem;
+    font-size: 4rem;
+    opacity: 0.9;
+    filter: drop-shadow(0 8px 16px #00000044);
+}
+
+/* ---------- Wallet hero ---------- */
+.ep-wallet-hero {
+    background: linear-gradient(135deg, #0b1220 0%, #1b2a4a 60%, #0ea5e933 100%);
+    box-shadow: 0 24px 48px -20px #0b122088;
+}
+.ep-coin-xl { font-size: 3.5rem; display: inline-block; }
+.ep-balance {
+    font-size: 3.25rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+}
+.ep-stat {
+    background: #ffffff14;
+    border: 1px solid #ffffff22;
+    border-radius: 1rem;
+    padding: 0.9rem 1rem;
+}
+.ep-stat-value { font-size: 1.5rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.ep-stat-label { font-size: 0.8rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ---------- Referral code ---------- */
+.ep-refcode {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #f8fafc;
+    border: 2px dashed #cbd5e1;
+    border-radius: 0.9rem;
+    padding: 0.5rem 0.5rem 0.5rem 1.1rem;
+}
+.ep-refcode code {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--ep-ink);
+}
+
+/* ---------- Spin wheel ---------- */
+.ep-wheel-wrap {
+    position: relative;
+    max-width: 420px;
+    margin: 0 auto;
+}
+.ep-wheel {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 20px 40px #10182833);
+    will-change: transform;
+}
+.ep-pointer {
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: #dc2626;
+    z-index: 2;
+    filter: drop-shadow(0 2px 4px #00000044);
+}
+.ep-result {
+    border-radius: 1.25rem;
+    padding: 1.25rem;
+    font-weight: 600;
+}
+.ep-result-win {
+    background: #ecfdf5;
+    border: 2px solid #10b98155;
+    color: #065f46;
+}
+.ep-result-lose {
+    background: #fef2f2;
+    border: 2px solid #ef444455;
+    color: #991b1b;
+}
+.ep-result-amount { font-size: 2rem; font-weight: 800; }
+
+/* Offerwall provider logo placeholder */
+.ep-provider-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, #f6c453, #e8933c);
+    box-shadow: 0 4px 12px rgba(232, 147, 60, 0.35);
+}
+
+/* ---- Ads (Phase 5) ---- */
+.ep-ad { width: 100%; }
+.ep-ad:empty { display: none; }
+.ep-ad-frame { background: #0d0d17; min-height: 120px; }
+.ep-countdown-track {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+.ep-countdown-fill {
+    height: 100%;
+    width: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f5c518, #ff9d2e);
+    transform: scaleX(0);
+    transform-origin: left center;
+}
+.ep-reward-card .btn-gold:disabled { opacity: 0.65; }
+
+/* ---- Ad slots: sidebar rail + interstitial overlay (Phase 5) ---- */
+
+/* Sticky right-rail ad (desktop only). Starts hidden (d-none); ads.js
+   removes d-none only when a placement actually rendered, so an empty
+   slot never flashes or reserves space. */
+.ep-sidebar-ad {
+    position: fixed;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 300px;
+    max-height: 82vh;
+    overflow: hidden;
+    z-index: 1020;
+    border-radius: 12px;
+}
+
+/* Full-screen interstitial. The [hidden] attribute keeps it out of the
+   way until ads.js confirms a placement rendered, then fades it in. */
+.ep-interstitial {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(8, 8, 18, 0.68);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.ep-interstitial[hidden] { display: none; }
+.ep-interstitial-inner {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+}
+.ep-interstitial-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: #111;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+.ep-interstitial-close:hover { background: #f5c518; }
+
+/* ============================================================
+   EarnPlus v2 — mPaisa-style mobile-money design system
+   Mobile-first: user app lives in a 520px shell; admin uses the
+   wide shell. All motion stays transform/opacity (60fps).
+   ============================================================ */
+
+:root {
+    --ep-primary: #0e9f6e;
+    --ep-primary-dark: #0b7a55;
+    --ep-primary-deep: #075e43;
+    --ep-primary-soft: #e3f5ec;
+    --ep-ink: #17222f;
+    --ep-muted: #67788c;
+    --ep-line: #e6ecf1;
+    --ep-bg: #eef2f5;
+    --ep-card: #ffffff;
+    --ep-radius: 20px;
+    --ep-danger: #e5484d;
+    --ep-shadow: 0 10px 30px -12px rgba(16, 40, 32, 0.18);
+}
+
+body {
+    background: var(--ep-bg);
+    color: var(--ep-ink);
+}
+
+/* ---------- App shell ---------- */
+.ep-shell {
+    max-width: 520px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--ep-bg);
+    position: relative;
+}
+
+.ep-shell-wide {
+    max-width: 1120px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+@media (min-width: 560px) {
+    .ep-shell {
+        border-left: 1px solid var(--ep-line);
+        border-right: 1px solid var(--ep-line);
+        box-shadow: 0 0 60px -30px rgba(16, 40, 32, 0.25);
+    }
+}
+
+/* ---------- Top app bar ---------- */
+.ep-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--ep-line);
+}
+
+.ep-topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    gap: 12px;
+}
+
+.ep-brand {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    text-decoration: none;
+    color: var(--ep-ink);
+    font-weight: 800;
+    font-size: 1.12rem;
+}
+
+.ep-brand:hover { color: var(--ep-ink); }
+
+.ep-balance-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--ep-ink);
+    color: #fff;
+    border-radius: 999px;
+    padding: 7px 14px 7px 8px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+}
+
+.ep-balance-pill:hover { color: #fff; }
+
+.ep-balance-pill .ep-coin {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8rem;
+}
+
+.ep-coin {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, #ffe9a8, var(--ep-gold) 62%, #d99a00);
+    color: #3a2a00;
+    font-weight: 800;
+    box-shadow: inset 0 -3px 6px rgba(120, 70, 0, 0.35), 0 4px 10px -2px rgba(245, 179, 1, 0.55);
+}
+
+.ep-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--ep-primary-soft);
+    color: var(--ep-primary-dark);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    overflow: hidden;
+}
+
+/* ---------- Bottom navigation ---------- */
+.ep-bottomnav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 520px;
+    z-index: 1030;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid var(--ep-line);
+    display: flex;
+    padding: 8px 6px calc(10px + env(safe-area-inset-bottom));
+}
+
+.ep-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 2px;
+    color: var(--ep-muted);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: color 140ms ease, background 140ms ease;
+}
+
+.ep-nav-item:hover { color: var(--ep-primary-dark); }
+
+.ep-nav-item.active { color: var(--ep-primary-dark); }
+
+.ep-nav-item .ep-nav-icon {
+    font-size: 1.32rem;
+    line-height: 1;
+}
+
+.ep-nav-fab-wrap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.ep-fab {
+    width: 58px;
+    height: 58px;
+    margin-top: -26px;
+    border-radius: 50%;
+    border: 4px solid var(--ep-bg);
+    background: linear-gradient(180deg, var(--ep-gold), #d99a00);
+    color: #3a2a00;
+    font-size: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 10px 24px -8px rgba(245, 179, 1, 0.7);
+    transition: transform 140ms ease, filter 140ms ease;
+    padding: 0;
+}
+
+button.ep-fab:hover { filter: brightness(1.07); }
+button.ep-fab:active { transform: scale(0.94); }
+button.ep-fab:disabled {
+    filter: grayscale(0.7) opacity(0.6);
+    cursor: default;
+}
+
+.ep-fab-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--ep-muted);
+    margin-top: 2px;
+}
+
+.ep-has-bottomnav {
+    padding-bottom: 96px;
+}
+
+/* ---------- Balance hero ---------- */
+.ep-hero-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 26px;
+    background: linear-gradient(135deg, var(--ep-primary) 0%, var(--ep-primary-dark) 55%, var(--ep-primary-deep) 100%);
+    color: #fff;
+    padding: 26px 24px;
+    box-shadow: 0 18px 40px -16px rgba(11, 122, 85, 0.55);
+}
+
+.ep-hero-card::before,
+.ep-hero-card::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.09);
+    pointer-events: none;
+}
+
+.ep-hero-card::before {
+    width: 220px;
+    height: 220px;
+    right: -70px;
+    top: -70px;
+}
+
+.ep-hero-card::after {
+    width: 130px;
+    height: 130px;
+    right: 60px;
+    bottom: -60px;
+}
+
+.ep-hero-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    opacity: 0.78;
+    font-weight: 600;
+}
+
+.ep-hero-balance {
+    font-size: 2.9rem;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.ep-hero-sub {
+    opacity: 0.85;
+    font-size: 0.95rem;
+}
+
+.ep-hero-chips {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.ep-chip {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
+    padding: 8px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+/* ---------- Quick actions ---------- */
+.ep-qa-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.ep-qa {
+    background: var(--ep-card);
+    border-radius: var(--ep-radius);
+    padding: 16px 8px 13px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ep-ink);
+    box-shadow: var(--ep-shadow);
+    border: 1px solid rgba(230, 236, 241, 0.7);
+    transition: transform 150ms ease, box-shadow 150ms ease;
+    position: relative;
+    display: block;
+}
+
+.ep-qa:hover {
+    color: var(--ep-ink);
+    transform: translateY(-3px);
+    box-shadow: 0 16px 34px -14px rgba(16, 40, 32, 0.25);
+}
+
+.ep-qa-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 9px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    background: var(--ep-primary-soft);
+}
+
+.ep-qa:nth-child(3n+2) .ep-qa-icon { background: #fff4d6; }
+.ep-qa:nth-child(3n) .ep-qa-icon { background: #e7f0fe; }
+
+.ep-qa-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.ep-qa-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--ep-line);
+    color: var(--ep-muted);
+    border-radius: 999px;
+    padding: 3px 8px;
+}
+
+/* ---------- Cards & lists ---------- */
+.ep-card {
+    background: var(--ep-card);
+    border-radius: var(--ep-radius);
+    box-shadow: var(--ep-shadow);
+    border: 1px solid rgba(230, 236, 241, 0.7);
+    padding: 20px;
+}
+
+.ep-section-title {
+    font-weight: 800;
+    font-size: 1.02rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ep-tx {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 4px;
+    border-bottom: 1px solid var(--ep-line);
+}
+
+.ep-tx:last-child { border-bottom: none; }
+
+.ep-tx-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background: var(--ep-primary-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.ep-tx-icon.debit { background: #fdeaea; }
+
+.ep-tx-meta { flex: 1; min-width: 0; }
+
+.ep-tx-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ep-tx-time { color: var(--ep-muted); font-size: 0.76rem; }
+
+.ep-tx-amount { font-weight: 800; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+.ep-tx-amount.credit { color: var(--ep-primary-dark); }
+.ep-tx-amount.debit { color: var(--ep-danger); }
+
+.ep-empty {
+    text-align: center;
+    color: var(--ep-muted);
+    padding: 26px 10px;
+    font-size: 0.9rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+    background: var(--ep-primary);
+    border-color: var(--ep-primary);
+    font-weight: 700;
+    border-radius: 14px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--ep-primary-dark);
+    border-color: var(--ep-primary-dark);
+}
+
+.btn {
+    border-radius: 14px;
+    font-weight: 600;
+}
+
+/* ---------- Google button ---------- */
+.ep-google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    background: #fff;
+    border: 1.5px solid var(--ep-line);
+    border-radius: 14px;
+    padding: 13px;
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--ep-ink);
+    text-decoration: none;
+    box-shadow: 0 6px 18px -10px rgba(16, 40, 32, 0.25);
+    transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.ep-google-btn:hover {
+    color: var(--ep-ink);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px -12px rgba(16, 40, 32, 0.3);
+}
+
+.ep-google-g {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.ep-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--ep-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.ep-divider::before,
+.ep-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--ep-line);
+}
+
+/* ---------- Auth screens ---------- */
+.ep-auth-wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 28px 20px;
+    background:
+        radial-gradient(600px 300px at 50% -60px, rgba(14, 159, 110, 0.16), transparent),
+        var(--ep-bg);
+}
+
+.ep-auth-card {
+    background: var(--ep-card);
+    border-radius: 26px;
+    box-shadow: var(--ep-shadow);
+    padding: 30px 26px;
+    border: 1px solid rgba(230, 236, 241, 0.7);
+}
+
+.ep-auth-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.35rem;
+    color: var(--ep-ink);
+    text-decoration: none;
+    margin-bottom: 24px;
+}
+
+.ep-auth-brand:hover { color: var(--ep-ink); }
+
+.form-control {
+    border-radius: 14px;
+    padding: 12px 16px;
+    border: 1.5px solid var(--ep-line);
+}
+
+.form-control:focus {
+    border-color: var(--ep-primary);
+    box-shadow: 0 0 0 4px rgba(14, 159, 110, 0.14);
+}
+
+/* ---------- Landing ---------- */
+.ep-landing-hero {
+    background: linear-gradient(160deg, var(--ep-primary-deep) 0%, var(--ep-primary-dark) 55%, var(--ep-primary) 130%);
+    color: #fff;
+    border-radius: 0 0 34px 34px;
+    padding: 54px 22px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ep-landing-hero::before {
+    content: "";
+    position: absolute;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    right: -110px;
+    top: -110px;
+}
+
+.ep-landing-hero::after {
+    content: "";
+    position: absolute;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    left: -60px;
+    bottom: -80px;
+}
+
+.ep-phone {
+    background: #fff;
+    border-radius: 30px;
+    padding: 20px 18px;
+    color: var(--ep-ink);
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 1;
+}
+
+.ep-stat-row {
+    display: flex;
+    gap: 12px;
+}
+
+.ep-stat-chip {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 13px 8px;
+    text-align: center;
+}
+
+.ep-stat-chip .ep-stat-num {
+    font-size: 1.3rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.ep-stat-chip small { opacity: 0.8; font-size: 0.72rem; }
+
+.ep-feature {
+    background: var(--ep-card);
+    border-radius: var(--ep-radius);
+    padding: 20px;
+    box-shadow: var(--ep-shadow);
+    border: 1px solid rgba(230, 236, 241, 0.7);
+    height: 100%;
+    transition: transform 150ms ease;
+}
+
+.ep-feature:hover { transform: translateY(-4px); }
+
+.ep-feature-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 16px;
+    background: var(--ep-primary-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+}
+
+.ep-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 0;
+}
+
+.ep-step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--ep-ink);
+    color: #fff;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ---------- Task / provider cards ---------- */
+.ep-provider-card {
+    background: var(--ep-card);
+    border-radius: var(--ep-radius);
+    padding: 18px;
+    box-shadow: var(--ep-shadow);
+    border: 1px solid rgba(230, 236, 241, 0.7);
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    transition: transform 150ms ease;
+}
+
+.ep-provider-card:hover { transform: translateY(-3px); }
+
+.ep-provider-logo {
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--ep-primary-soft), #d7efe3);
+    color: var(--ep-primary-dark);
+    font-weight: 800;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ep-payout {
+    font-weight: 800;
+    color: var(--ep-primary-dark);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Admin ---------- */
+.ep-admin-stat {
+    background: var(--ep-card);
+    border-radius: var(--ep-radius);
+    padding: 20px;
+    box-shadow: var(--ep-shadow);
+    border: 1px solid rgba(230, 236, 241, 0.7);
+}
+
+.ep-admin-stat .ep-stat-num {
+    font-size: 1.7rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.ep-admin-stat .ep-stat-label {
+    color: var(--ep-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.table.ep-table {
+    background: var(--ep-card);
+    border-radius: var(--ep-radius);
+    overflow: hidden;
+}
+
+.ep-table thead th {
+    background: #f6f9fb;
+    border: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ep-muted);
+}
+
+/* ---------- Referral ---------- */
+.ep-refcode {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f6f9fb;
+    border: 1.5px dashed var(--ep-primary);
+    border-radius: 14px;
+    padding: 10px 10px 10px 18px;
+}
+
+.ep-refcode code {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    color: var(--ep-primary-dark);
+    flex: 1;
+}
+
+/* ---------- Spin page ---------- */
+.ep-wheel-stage {
+    background: var(--ep-card);
+    border-radius: 26px;
+    box-shadow: var(--ep-shadow);
+    padding: 26px 18px;
+    border: 1px solid rgba(230, 236, 241, 0.7);
+}
+
+/* ---------- Footer ---------- */
+.ep-footer {
+    background: transparent;
+    color: var(--ep-muted);
+    font-size: 0.8rem;
+    padding: 26px 18px 20px;
+    text-align: center;
+}
+
+/* ---------- Reward card (restyled hooks kept) ---------- */
+.ep-countdown-track {
+    height: 10px;
+    background: var(--ep-line);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.ep-countdown-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--ep-primary), var(--ep-gold));
+    border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ep-qa:hover,
+    .ep-feature:hover,
+    .ep-provider-card:hover,
+    .ep-google-btn:hover {
+        transform: none;
+    }
+}
+
+/* ---- Withdraw: payout method radio cards ---- */
+.ep-method {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem;
+    background: #fff;
+    border: 2px solid #eef1f4;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.ep-method-active {
+    border-color: #10b981;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.15);
+}
+.ep-method-radio {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 2px solid #cbd5e1;
+    flex-shrink: 0;
+    position: relative;
+    transition: border-color 0.2s ease;
+}
+.ep-method-active .ep-method-radio {
+    border-color: #10b981;
+}
+.ep-method-active .ep-method-radio::after {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: #10b981;
+}
+
+/* ---- Withdraw: status timeline ---- */
+.ep-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.ep-timeline li {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    align-items: flex-start;
+}
+.ep-timeline .dot {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    background: #e2e8f0;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+.ep-timeline li.done .dot {
+    background: #10b981;
+}
+.ep-timeline li.current .dot {
+    background: #f5b301;
+    box-shadow: 0 0 0 4px rgba(245, 179, 1, 0.2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ep-method {
+        transition: none;
+    }
+}
+
+/* ---------- Festival promotion banner & badges (Phase 7) ---------- */
+.ep-promo-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #7c3aed, #2563eb 60%, #0891b2);
+    color: #fff;
+    border-radius: var(--ep-radius);
+    box-shadow: var(--ep-shadow);
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+}
+.ep-promo-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.25), transparent 45%);
+    pointer-events: none;
+}
+.ep-promo-badge {
+    flex-shrink: 0;
+    font-size: 0.85rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    background: #fbbf24;
+    color: #451a03;
+    border-radius: 999px;
+    padding: 6px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+.ep-promo-text {
+    flex-grow: 1;
+    min-width: 0;
+}
+.ep-promo-title {
+    font-weight: 800;
+    font-size: 0.95rem;
+    line-height: 1.25;
+}
+.ep-promo-sub {
+    font-size: 0.76rem;
+    opacity: 0.85;
+    line-height: 1.3;
+}
+.ep-promo-countdown {
+    flex-shrink: 0;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 12px;
+    padding: 6px 10px;
+}
+.ep-promo-countdown-label {
+    display: block;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+}
+.ep-promo-countdown-time {
+    font-weight: 800;
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* Promo variant of the quick-action badge: gold, pops. */
+.ep-qa-badge-promo {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #451a03;
+}
+
+/* Policy page body: readable long-form typography. */
+.ep-policy-body { line-height: 1.75; }
+.ep-policy-body h2 { font-size: 1.15rem; font-weight: 800; margin: 1.2rem 0 0.5rem; }
+.ep-policy-body h3 { font-size: 1.02rem; font-weight: 700; margin: 1rem 0 0.4rem; }
+.ep-policy-body p { margin-bottom: 0.9rem; }
+.ep-policy-body ul, .ep-policy-body ol { margin-bottom: 0.9rem; padding-left: 1.4rem; }
+.ep-policy-body li { margin-bottom: 0.35rem; }
+.ep-policy-body blockquote {
+    border-left: 3px solid var(--ep-primary, #0e9f6e);
+    padding: 0.4rem 0 0.4rem 1rem; margin: 0 0 0.9rem; color: var(--ep-muted, #5b6b7c);
+}
+.ep-policy-body table { width: 100%; margin-bottom: 0.9rem; border-collapse: collapse; font-size: 0.9rem; }
+.ep-policy-body th, .ep-policy-body td { border: 1px solid var(--ep-line, #e5ebf0); padding: 0.45rem 0.6rem; text-align: left; }
+.ep-policy-body img { max-width: 100%; height: auto; border-radius: 12px; }
